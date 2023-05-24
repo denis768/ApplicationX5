@@ -10,36 +10,36 @@
 
     <TextView
         android:id="@+id/Content"
-        android:layout_width="384dp"
-        android:layout_height="610dp"
+        android:layout_width="364dp"
+        android:layout_height="395dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="20dp"
         android:background="@color/grey"
-        android:text="messageContent"
+        android:hint="*описание отсканированного продукта"
         android:textColor="@color/black"
         android:textSize="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddBtn"
-        app:layout_constraintVertical_bias="0.319" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.937" />
 
     <Button
         android:id="@+id/AddBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
+        android:layout_width="139dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="@color/red"
-        android:text="Add"
+        android:text="Добавить"
         android:textColor="@color/white"
         android:textSize="26dp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/Scan" />
 
     <TextView
         android:id="@+id/Format"
@@ -49,25 +49,26 @@
         android:text="messageFormat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.099" />
 
     <Button
         android:id="@+id/Scan"
-        android:layout_width="205dp"
-        android:layout_height="wrap_content"
+        android:layout_width="266dp"
+        android:layout_height="106dp"
         android:backgroundTint="@color/green"
-        android:text="Scan"
+        android:text="Сканировать"
         android:textColor="@color/white"
         android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.128" />
+        app:layout_constraintVertical_bias="0.185" />
 
     <TextView
         android:id="@+id/textView2"
@@ -87,6 +88,7 @@
         android:id="@+id/imageButton"
         android:layout_width="52dp"
         android:layout_height="48dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"

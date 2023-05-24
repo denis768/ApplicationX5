@@ -16,10 +16,10 @@ import com.google.zxing.integration.android.IntentResult;
 import java.util.TreeMap;
 
 public class MainActivity2 extends Activity implements View.OnClickListener {
-    public TreeMap<Integer, String> products = new TreeMap<>();
+    public String text;
     Button scanBtn;
     TextView messageText, messageFormat;
-    Button AddBtn;
+    static Button AddBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +34,9 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
         scanBtn.setOnClickListener(this);
         AddBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity4.class);
+            intent.putExtra("barcode", messageFormat.getText().toString());
             startActivity(intent);
         });
-//        Set<Map.Entry<Integer, String>> set = products.entrySet();
-//        // Итерируем по каждому элементу
-//        for (Map.Entry<Integer, String> entry : set) {
-//            int barcode = entry.getKey();
-//            String quantity = entry.getValue();
-//            System.out.println("Штрих-код: " + barcode + ", Количество: " + quantity);
-//        }
     }
 
     @Override
@@ -54,7 +48,7 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null) {
@@ -62,21 +56,19 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
                 Toast.makeText(getBaseContext(), "Exit", Toast.LENGTH_SHORT).show();
             } else {
                 messageFormat.setText(intentResult.getContents());
+                text = messageFormat.getText().toString();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+        if (Data.products.containsKey(Long.parseLong(text))){
+            AddBtn.setVisibility(View.INVISIBLE);
+            messageText.setText(Data.products.get(Long.parseLong(text)));
+            Toast.makeText(this, "Товар найден, смотри описание", Toast.LENGTH_LONG).show();
+        }else {
+            AddBtn.setVisibility(View.VISIBLE);
+            messageText.setText(null);
+            Toast.makeText(this, "Товар не найден вы можете его добавить", Toast.LENGTH_LONG).show();
+        }
     }
-
-    // Добавление элементов в TreeMap
-    public void addProduct(int barcode, String quantity) {
-        products.put(barcode, quantity);
-    }
-
-    // Получение элементов из TreeMap
-    public TreeMap<Integer, String> getProducts() {
-        return products;
-    }
-
-
 }
