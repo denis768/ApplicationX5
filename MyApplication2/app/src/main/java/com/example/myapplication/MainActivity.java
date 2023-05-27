@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class MainActivity extends Activity implements View.OnClickListener {
     public String text;
     Button scanBtn;
+    ImageButton imageBtn;
     TextView messageText, messageFormat;
     static Button AddBtn;
 
@@ -29,11 +31,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         messageText = findViewById(R.id.Content);
         messageFormat = findViewById(R.id.Format);
         AddBtn = findViewById(R.id.AddBtn);
+        imageBtn= findViewById(R.id.imageBtn);
 
         scanBtn.setOnClickListener(this);
         AddBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddBarcode.class);
             intent.putExtra("barcode", messageFormat.getText().toString());
+            startActivity(intent);
+        });
+        imageBtn.setOnClickListener(v-> {
+            Intent intent = new Intent(this, Profile.class);
             startActivity(intent);
         });
     }
@@ -55,6 +62,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             if (intentResult.getContents() == null) {
                 Toast.makeText(getBaseContext(), "Exit", Toast.LENGTH_SHORT).show();
             } else {
+                messageFormat.setVisibility(View.VISIBLE);
                 messageFormat.setText(intentResult.getContents());
                 text = messageFormat.getText().toString();
             }

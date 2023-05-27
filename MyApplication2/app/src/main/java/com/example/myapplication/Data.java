@@ -14,28 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Data {
     static TreeMap<Long, String> products = new TreeMap<>();
     static Retrofit retrofit;
+
     public Data() {
         retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.14:8080/").addConverterFactory(GsonConverterFactory.create()).build();
-    }
-
-    public void addProduct(long barcode, String quantity, Context context) {
-        sendBarcodeService sendService = retrofit.create(sendBarcodeService.class);
-        Call<Boolean> req = sendService.send(barcode, quantity);
-        req.enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                try {
-                    Toast.makeText(context, "" + response.body(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
     }
 
     public static void getProduct(long barcode, Context context) {
@@ -56,6 +37,26 @@ public class Data {
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void addProduct(long barcode, String quantity, Context context) {
+        sendBarcodeService sendService = retrofit.create(sendBarcodeService.class);
+        Call<Boolean> req = sendService.send(barcode, quantity);
+        req.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                try {
+                    Toast.makeText(context, "" + response.body(), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
                 t.printStackTrace();
             }
         });
